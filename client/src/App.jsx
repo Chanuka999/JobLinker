@@ -1,12 +1,26 @@
-import React from "react";
+import React, { Children } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+  DashboardLayout,
+  HomeLayout,
+  Landing,
+  Login,
+  Register,
+  Error,
+} from "./pages";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<h1>Home</h1>} />
-        <Route path="/about" element={<h1>About</h1>} />
+        <Route path="/" element={<HomeLayout />}>
+          <Route index={true} element={<Landing />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="dashboard" element={<DashboardLayout />} />
+        </Route>
+
+        <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
   );
