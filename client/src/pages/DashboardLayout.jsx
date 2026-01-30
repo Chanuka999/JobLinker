@@ -20,24 +20,32 @@ const DashboardLayout = () => {
     console.log("logout user");
   };
   return (
-    <DashboardContext.Provider value={user,toggleDarkTheam,toggleSidebar,logoutUser,showSideBar,isDarkTheame}>
-    <Wrapper>
-      <main className="dashboard">
-        <SmallSideBar />
-        <BigSideBar />
-        <div>
-          <Navbar />
-          <div className="dashboard-page">
-            <Outlet />
+    <DashboardContext.Provider
+      value={{
+        user,
+        toggleDarkTheam,
+        toggleSidebar,
+        logoutUser,
+        showSideBar,
+        isDarkTheame,
+      }}
+    >
+      <Wrapper>
+        <main className="dashboard">
+          <SmallSideBar />
+          <BigSideBar />
+          <div>
+            <Navbar />
+            <div className="dashboard-page">
+              <Outlet />
+            </div>
           </div>
-        </div>
-      </main>
-    </Wrapper>
+        </main>
+      </Wrapper>
     </DashboardContext.Provider>
   );
 };
 
-export const useDashboardContext = () =>useContext(DashboardContext);
-
+export const useDashboardContext = () => useContext(DashboardContext);
 
 export default DashboardLayout;
