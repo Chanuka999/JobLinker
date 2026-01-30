@@ -7,6 +7,7 @@ import {
   Login,
   Register,
   Error,
+  Admin,
 } from "./pages";
 
 const App = () => {
@@ -18,6 +19,10 @@ const App = () => {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="dashboard" element={<DashboardLayout />} />
+        </Route>
+
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route path="admin" element={<Admin />} />
         </Route>
 
         <Route path="*" element={<Error />} />
