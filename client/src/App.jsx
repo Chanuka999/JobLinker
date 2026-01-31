@@ -10,6 +10,14 @@ import {
   Admin,
 } from "./pages";
 
+const checkDefaultTheme = () => {
+  const isDarkTheme = localStorage.getItem("darkTheme") === "true";
+  document.body.classList.toggle("dark-theme", isDarkTheme);
+  return isDarkTheme;
+};
+
+const isDarkThemeEnabled = checkDefaultTheme();
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -18,7 +26,12 @@ const App = () => {
           <Route index={true} element={<Landing />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="dashboard" element={<DashboardLayout />} />
+          <Route
+            path="dashboard"
+            element={
+              <DashboardLayout isDarkThemeEnabled={isDarkThemeEnabled} />
+            }
+          />
         </Route>
 
         <Route path="/dashboard" element={<DashboardLayout />}>
