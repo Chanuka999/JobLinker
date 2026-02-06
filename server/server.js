@@ -56,10 +56,43 @@ app.post("/api/v1/jobs", (req, res) => {
 app.get("/api/v1/jobs/:id", (req, res) => {
   const { id } = req.params;
   const job = jobs.find((job) => job.id === id);
-  if (job) {
+  if (!job) {
     return res.status(404).json({ msg: `no ob with id ${id}` });
   }
   res.status(200).json({ job });
+});
+
+//edit job
+app.patch("/api/v1/jobs/:id", (req, res) => {
+  const { company, position } = req.body;
+  if (!company || !position) {
+    res
+      .status(400)
+      .json({ message: "please provide company name and position" });
+    return;
+  }
+
+  const { id } = req.params;
+  const job = jobs.find((job) => job.id === id);
+  if (!job) {
+    return res.status(404).json({ message: `no job with id ${id}` });
+  }
+  job.company = company;
+  job.position = position;
+
+  res.status(200).json({ message: "job modified", job });
+});
+
+//delete job
+app.delete("/api/v1/jobs/:id", (req, res) => {
+  const { id } = req.params;
+  const job = jobs.find((job) => job.id === id);
+  if (!job) {
+    return res.status(400).json({ message: `no job with id ${id}` });
+  }
+  const newJob = jobs.filter((job) => job.id != id);
+  jobs = newJob;
+  res.status(200).json({ message: "job deleted" });
 });
 
 const port = process.env.PORT || 5100;
