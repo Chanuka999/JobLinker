@@ -1,8 +1,10 @@
+import "express-async-errors";
 import express from "express";
 import morgan from "morgan";
 import * as dotenv from "dotenv";
 import JobRouter from "./routes/jobRouter.js";
 import mongoose from "mongoose";
+
 dotenv.config();
 
 const app = express();
