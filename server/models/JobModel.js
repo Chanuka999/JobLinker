@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const JobSchema = mongoose.Schema(
   {
-    comapany: String,
+    company: String,
     position: String,
     jobStatus: {
       type: String,
