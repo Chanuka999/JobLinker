@@ -1,4 +1,4 @@
-import jobModel from "../models/JobModel.js";
+import job from "../models/JobModel.js";
 
 import { nanoid } from "nanoid";
 
@@ -13,7 +13,7 @@ export const getAllJobs = async (req, res) => {
 
 export const createJob = async (req, res) => {
   try {
-    const job = await jobModel.create(req.body);
+    const job = await job.create(req.body);
     res.status(200).json({ job });
   } catch (error) {
     console.log(error);
@@ -24,9 +24,8 @@ export const createJob = async (req, res) => {
 
 export const getjob = async (req, res) => {
   const { id } = req.params;
-  const job = jobs.find((job) => job.id === id);
+  const job = await job.findById(id);
   if (!job) {
-    throw new Error("no job with that id");
     return res.status(404).json({ msg: `no ob with id ${id}` });
   }
   res.status(200).json({ job });
@@ -42,7 +41,7 @@ export const updateJob = async (req, res) => {
   }
 
   const { id } = req.params;
-  const job = jobs.find((job) => job.id === id);
+  const job = job.find((job) => job.id === id);
   if (!job) {
     return res.status(404).json({ message: `no job with id ${id}` });
   }
@@ -54,11 +53,10 @@ export const updateJob = async (req, res) => {
 
 export const deleteJob = async (req, res) => {
   const { id } = req.params;
-  const job = jobs.find((job) => job.id === id);
-  if (!job) {
+  const removeJob = await job.findByIdAndDelete(id);
+  if (!removeJob) {
     return res.status(400).json({ message: `no job with id ${id}` });
   }
-  const newJob = jobs.filter((job) => job.id != id);
-  jobs = newJob;
-  res.status(200).json({ message: "job deleted" });
+
+  res.status(200).json({ message: "job deleted", job: removeJob });
 };
