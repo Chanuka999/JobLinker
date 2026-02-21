@@ -1,6 +1,5 @@
 import React from "react";
 import Wrapper from "../assets/wrappers/LandingPage";
-
 import { Link } from "react-router-dom";
 import main from "../assets/images/main.jpg";
 import { motion } from "framer-motion";
@@ -9,46 +8,49 @@ import { Logo } from "../components";
 const Landing = () => {
   return (
     <Wrapper>
-      <Logo />
-      <div className="container-page flex flex-col md:flex-row items-center gap-0">
-        <div className="info w-full md:w-1/2 flex flex-col items-center text-center">
-          <h1>
-            job<span>Tracking</span>app
-          </h1>
+      <nav className="nav-center">
+        <Logo />
+      </nav>
 
-          <p className="text-bold">
-            Welcome to JobLinker, your all-in-one platform for managing and
-            tracking job applications. Whether you're actively looking for new
-            opportunities or just exploring your options, JobLinker helps you
-            stay organized and ahead of the game.
+      <div className="container page">
+        {/* Main Hero Content */}
+        <div className="info">
+          <motion.h1
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            Job <span>Tracking</span> Made Simple
+          </motion.h1>
+
+          <p>
+            Stop losing track of your career progress.{" "}
+            <strong>JobLinker</strong> is a powerful, intuitive platform
+            designed to organize your job search and help you land your dream
+            role faster.
           </p>
 
-          <div className="flex gap-4 mt-6">
-            <Link to="/register" className="btn register-link">
-              Register
+          <div className="btn-container">
+            <Link to="/register" className="btn btn-primary">
+              Get Started Free
             </Link>
-            <Link to="/login" className="btn">
-              Login
+            <Link to="/login" className="btn btn-secondary">
+              Sign In
             </Link>
           </div>
         </div>
 
-        <motion.img
-          src={main}
-          alt="job hunt"
-          className="
-            w-full
-            md:w-1/2
-            max-w-3xl
-            h-86
-            object-contain
-            p-6
-          "
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          whileHover={{ scale: 1.15 }}
-        />
+        {/* Visual Element */}
+        <div className="main-img-container">
+          <motion.div
+            className="img-overlay"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <img src={main} alt="job search" className="img main-img" />
+          </motion.div>
+        </div>
       </div>
     </Wrapper>
   );
