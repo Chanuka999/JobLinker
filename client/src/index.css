@@ -340,3 +340,54 @@ button:disabled {
   background: #ffeeee;
   color: #d66a6a;
 }
+
+/* Glassmorphism Effect for Navbar */
+.nav-center {
+  width: var(--fluid-width);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+}
+
+/* Modern Heading */
+h1 {
+  font-weight: 700;
+  font-size: 3.5rem; /* Larger, bolder */
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+span {
+  color: var(--primary-500);
+  position: relative;
+}
+
+/* Paragraph styling */
+p {
+  color: var(--grey-600);
+  max-width: 35em;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+/* Improved Buttons */
+.btn-primary {
+  padding: 0.8rem 2rem;
+  background: var(--primary-500);
+  box-shadow: 0 4px 14px 0 rgba(44, 177, 188, 0.39);
+  transition: all 0.3s ease;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--primary-500);
+  border: 1px solid var(--primary-500);
+  margin-left: 1rem;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
