@@ -39,7 +39,6 @@ export const updateJob = async (req, res) => {
   });
 
   if (!updateJob) throw new NotFoundError(`no job with id ${id}`);
-  res.status(404).json({ message: `no job with id ${id}` });
 
   res.status(StatusCodes.OK).json({ message: "job modified", job: updateJob });
 };
@@ -55,8 +54,6 @@ export const deleteJob = async (req, res) => {
   console.log(removeJob);
 
   if (!removeJob) throw new NotFoundError(`no job with id ${id}`);
-
-  res.status(404).json({ message: `no job with id ${id}` });
 
   res.status(StatusCodes.OK).json({ message: "job deleted", job: removeJob });
 };
