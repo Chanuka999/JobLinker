@@ -6,6 +6,7 @@ import JobRouter from "./routes/jobRouter.js";
 import mongoose from "mongoose";
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
 import { body, validationResult } from "express-validator";
+import { validateTest } from "./middleware/validationMiddleware.js";
 
 dotenv.config();
 
@@ -32,21 +33,8 @@ app.get("/", (req, res) => {
 
 app.post(
   "/api/v1/test",
-  [
-    body("name")
-      .notEmpty()
-      .withMessage("name is required")
-      .isLength({ min: 50 })
-      .withMessage("name must be at least 50"),
-  ],
-  (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      const errorMessage = errors.array().map((error) => error.msg);
-      return res.status(400).json({ errors: errorMessage });
-    }
-    next();
-  },
+  validateTest,
+
   (req, res) => {
     const { name } = req.body;
     res.json({ message: `hello ${name}` });
